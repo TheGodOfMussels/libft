@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimolin2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 14:59:25 by dimolin2          #+#    #+#             */
-/*   Updated: 2022/10/10 14:59:26 by dimolin2         ###   ########.fr       */
+/*   Created: 2022/10/17 21:03:29 by dimolin2          #+#    #+#             */
+/*   Updated: 2022/10/17 21:03:30 by dimolin2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
 
-	if (!s || !(*s) || !f)
-		return ;
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		f(i, &s[i]);
-		++i;
+		(*f)(i, s + i);
+		i++;
 	}
 }
