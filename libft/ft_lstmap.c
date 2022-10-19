@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimolin2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 21:03:29 by dimolin2          #+#    #+#             */
-/*   Updated: 2022/10/17 21:03:30 by dimolin2         ###   ########.fr       */
+/*   Created: 2022/10/19 17:33:44 by dimolin2          #+#    #+#             */
+/*   Updated: 2022/10/19 17:33:46 by dimolin2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	i;
+	t_list	*res;
+	t_list	*curr;
 
-	i = 0;
-	while (s[i] != '\0')
+	res = ft_lstnew(f(lst->content));
+	if (!res)
+		return (0);
+	curr = res;
+	lst = lst->next;
+	while (lst)
 	{
-		f(i, s + i);
-		i++;
+		curr->next = ft_lstnew(f(lst->content));
+		if (!curr->next)
+		{
+			ft_lstclear(&res, del);
+			return (0);
+		}
+		curr = curr->next;
+		lst = lst->next;
 	}
+	return (res);
 }

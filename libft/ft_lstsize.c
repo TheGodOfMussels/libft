@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimolin2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 21:03:29 by dimolin2          #+#    #+#             */
-/*   Updated: 2022/10/17 21:03:30 by dimolin2         ###   ########.fr       */
+/*   Created: 2022/10/19 16:19:00 by dimolin2          #+#    #+#             */
+/*   Updated: 2022/10/19 16:19:01 by dimolin2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	unsigned int	size;
 
-	i = 0;
-	while (s[i] != '\0')
+	if (!lst)
+		return (0);
+	size = 0;
+	while (lst)
 	{
-		f(i, s + i);
-		i++;
+		lst = lst->next;
+		size++;
 	}
+	return (size);
 }
